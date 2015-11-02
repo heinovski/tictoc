@@ -28,7 +28,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = $O/src/Txc1.o
+OBJS = $O/src/Txc1.o $O/src/Txc2.o
 
 # Message files
 MSGFILES =
@@ -117,4 +117,6 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/Txc1.o: src/Txc1.cc \
 	src/Txc1.h
+$O/src/Txc2.o: src/Txc2.cc \
+	src/Txc2.h
 
