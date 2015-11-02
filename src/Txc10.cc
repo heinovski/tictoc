@@ -59,6 +59,15 @@ void Txc10::forwardMessage(cMessage *msg)
     // We draw a random number between 0 and the size of gate `out[]'.
     int n = gateSize("out");
     int k = intuniform(0,n-1);
+//    if (!(msg->isSelfMessage())) {
+//        EV << "Message " << msg << " is a not a self message.";
+//        cGate *gate = msg->getArrivalGate()->getIndex();
+//        EV << "Message arrived at gate index " << arrival << endl;
+//        while (k == arrival) {
+//            k = intuniform(0,n-1);
+//            EV << "Chose forward gate index " << k << endl;
+//        }
+//    }
 
     EV << "Forwarding message " << msg << " on port out[" << k << "]\n";
     send(msg, "out", k);
