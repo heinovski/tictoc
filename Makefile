@@ -31,6 +31,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/src/Txc4.o \
     $O/src/Txc8.o \
+    $O/src/Txc9.o \
     $O/src/Txc1.o \
     $O/src/Txc7.o \
     $O/src/Txc2.o \
@@ -136,4 +137,6 @@ $O/src/Txc7.o: src/Txc7.cc \
 	src/Txc7.h
 $O/src/Txc8.o: src/Txc8.cc \
 	src/Txc8.h
+$O/src/Txc9.o: src/Txc9.cc \
+	src/Txc9.h
 
