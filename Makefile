@@ -36,6 +36,7 @@ OBJS = \
     $O/src/Txc7.o \
     $O/src/Txc2.o \
     $O/src/Txc3.o \
+    $O/src/Txc10.o \
     $O/src/Txc6.o
 
 # Message files
@@ -125,6 +126,8 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/Txc1.o: src/Txc1.cc \
 	src/Txc1.h
+$O/src/Txc10.o: src/Txc10.cc \
+	src/Txc10.h
 $O/src/Txc2.o: src/Txc2.cc \
 	src/Txc2.h
 $O/src/Txc3.o: src/Txc3.cc \
