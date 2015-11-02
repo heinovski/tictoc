@@ -11,6 +11,7 @@ doc/neddoc
 /memcheck
 
 /out
+tictoc
 
 examples/**/results
 examples/**/.tkenvrc
