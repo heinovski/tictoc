@@ -28,7 +28,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = $O/src/Txc4.o $O/src/Txc1.o $O/src/Txc2.o $O/src/Txc3.o
+OBJS = $O/src/Txc4.o $O/src/Txc1.o $O/src/Txc2.o $O/src/Txc3.o $O/src/Txc6.o
 
 # Message files
 MSGFILES =
@@ -123,4 +123,6 @@ $O/src/Txc3.o: src/Txc3.cc \
 	src/Txc3.h
 $O/src/Txc4.o: src/Txc4.cc \
 	src/Txc4.h
+$O/src/Txc6.o: src/Txc6.cc \
+	src/Txc6.h
 
