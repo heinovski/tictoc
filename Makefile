@@ -30,17 +30,21 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/src/Txc4.o \
+    $O/src/Txc12.o \
     $O/src/Txc8.o \
     $O/src/Txc9.o \
     $O/src/Txc1.o \
     $O/src/Txc7.o \
     $O/src/Txc2.o \
+    $O/src/Txc13.o \
     $O/src/Txc3.o \
     $O/src/Txc10.o \
-    $O/src/Txc6.o
+    $O/src/Txc6.o \
+    $O/src/tictoc13_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    src/tictoc13.msg
 
 #------------------------------------------------------------------------------
 
@@ -128,6 +132,11 @@ $O/src/Txc1.o: src/Txc1.cc \
 	src/Txc1.h
 $O/src/Txc10.o: src/Txc10.cc \
 	src/Txc10.h
+$O/src/Txc12.o: src/Txc12.cc \
+	src/Txc12.h
+$O/src/Txc13.o: src/Txc13.cc \
+	src/Txc13.h \
+	src/tictoc13_m.h
 $O/src/Txc2.o: src/Txc2.cc \
 	src/Txc2.h
 $O/src/Txc3.o: src/Txc3.cc \
@@ -142,4 +151,6 @@ $O/src/Txc8.o: src/Txc8.cc \
 	src/Txc8.h
 $O/src/Txc9.o: src/Txc9.cc \
 	src/Txc9.h
+$O/src/tictoc13_m.o: src/tictoc13_m.cc \
+	src/tictoc13_m.h
 
