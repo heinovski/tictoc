@@ -38,6 +38,7 @@ OBJS = \
     $O/src/Txc7.o \
     $O/src/Txc2.o \
     $O/src/Txc13.o \
+    $O/src/Txc16.o \
     $O/src/Txc3.o \
     $O/src/Txc10.o \
     $O/src/Txc6.o \
@@ -140,6 +141,9 @@ $O/src/Txc13.o: src/Txc13.cc \
 	src/tictoc13_m.h
 $O/src/Txc14.o: src/Txc14.cc \
 	src/Txc14.h \
+	src/tictoc13_m.h
+$O/src/Txc16.o: src/Txc16.cc \
+	src/Txc16.h \
 	src/tictoc13_m.h
 $O/src/Txc2.o: src/Txc2.cc \
 	src/Txc2.h

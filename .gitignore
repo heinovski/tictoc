@@ -20,3 +20,5 @@ examples/**/valgrind.out
 /gcc-debug/
 .csettings/
 .cproject
+
+/results/
