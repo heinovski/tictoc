@@ -19,15 +19,15 @@
 #include <csimplemodule.h>
 
 class Txc4: public cSimpleModule {
-    public:
-        Txc4();
-        virtual ~Txc4();
-    private:
-        int counter;
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Txc4();
+    virtual ~Txc4();
+private:
+    int counter;
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 
 #endif /* TXC1_H_ */

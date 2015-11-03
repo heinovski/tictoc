@@ -18,18 +18,15 @@
 
 Define_Module(Tic8);
 
-Tic8::Tic8()
-{
+Tic8::Tic8() {
     timeoutEvent = NULL;
 }
 
-Tic8::~Tic8()
-{
+Tic8::~Tic8() {
     cancelAndDelete(timeoutEvent);
 }
 
-void Tic8::initialize()
-{
+void Tic8::initialize() {
     // Initialize variables.
     timeout = 1.0;
     timeoutEvent = new cMessage("timeoutEvent");
@@ -38,21 +35,18 @@ void Tic8::initialize()
     EV << "Sending initial message\n";
     cMessage *msg = new cMessage("tictocMsg");
     send(msg, "out");
-    scheduleAt(simTime()+timeout, timeoutEvent);
+    scheduleAt(simTime() + timeout, timeoutEvent);
 }
 
-void Tic8::handleMessage(cMessage *msg)
-{
-    if (msg==timeoutEvent)
-    {
+void Tic8::handleMessage(cMessage *msg) {
+    if (msg == timeoutEvent) {
         // If we receive the timeout event, that means the packet hasn't
         // arrived in time and we have to re-send it.
         EV << "Timeout expired, resending message and restarting timer\n";
         cMessage *newMsg = new cMessage("tictocMsg");
         send(newMsg, "out");
-        scheduleAt(simTime()+timeout, timeoutEvent);
-    }
-    else // message arrived
+        scheduleAt(simTime() + timeout, timeoutEvent);
+    } else // message arrived
     {
         // Acknowledgment received -- delete the received message and cancel
         // the timeout event.
@@ -63,22 +57,18 @@ void Tic8::handleMessage(cMessage *msg)
         // Ready to send another one.
         cMessage *newMsg = new cMessage("tictocMsg");
         send(newMsg, "out");
-        scheduleAt(simTime()+timeout, timeoutEvent);
+        scheduleAt(simTime() + timeout, timeoutEvent);
     }
 }
 
 Define_Module(Toc8);
 
-void Toc8::handleMessage(cMessage *msg)
-{
-    if (uniform(0,1) < 0.1)
-    {
+void Toc8::handleMessage(cMessage *msg) {
+    if (uniform(0, 1) < 0.1) {
         EV << "\"Losing\" message.\n";
         bubble("message lost");  // making animation more informative...
         delete msg;
-    }
-    else
-    {
+    } else {
         EV << "Sending back same message as acknowledgment.\n";
         send(msg, "out");
     }

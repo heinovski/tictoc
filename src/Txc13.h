@@ -20,19 +20,14 @@
 #include <tictoc13_m.h>
 
 class Txc13: public cSimpleModule {
-    public:
-        Txc13();
-        virtual ~Txc13();
-    private:
-        simtime_t timeout;  // timeout
-        cMessage *timeoutEvent;  // holds pointer to the timeout self-message
-        int seq;  // message sequence number
-        cMessage *message;  // message that has to be re-sent on timeout
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void forwardMessage(TicTocMsg13 *msg);
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
-        virtual TicTocMsg13* generateMessage();
+public:
+    Txc13();
+    virtual ~Txc13();
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void forwardMessage(TicTocMsg13 *msg);
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+    virtual TicTocMsg13* generateMessage();
 };
 #endif /* TXC13_H_ */

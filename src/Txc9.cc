@@ -18,18 +18,15 @@
 
 Define_Module(Tic9);
 
-Tic9::Tic9()
-{
+Tic9::Tic9() {
     timeoutEvent = NULL;
 }
 
-Tic9::~Tic9()
-{
+Tic9::~Tic9() {
     cancelAndDelete(timeoutEvent);
 }
 
-void Tic9::initialize()
-{
+void Tic9::initialize() {
     // Initialize variables.
     seq = 0;
     timeout = 1.0;
@@ -39,20 +36,17 @@ void Tic9::initialize()
     EV << "Sending initial message\n";
     message = generateNewMessage();
     sendCopyOf(message);
-    scheduleAt(simTime()+timeout, timeoutEvent);
+    scheduleAt(simTime() + timeout, timeoutEvent);
 }
 
-void Tic9::handleMessage(cMessage *msg)
-{
-    if (msg==timeoutEvent)
-    {
+void Tic9::handleMessage(cMessage *msg) {
+    if (msg == timeoutEvent) {
         // If we receive the timeout event, that means the packet hasn't
         // arrived in time and we have to re-send it.
         EV << "Timeout expired, resending message and restarting timer\n";
         sendCopyOf(message);
-        scheduleAt(simTime()+timeout, timeoutEvent);
-    }
-    else // message arrived
+        scheduleAt(simTime() + timeout, timeoutEvent);
+    } else // message arrived
     {
         // Acknowledgement received!
         EV << "Received: " << msg->getName() << "\n";
@@ -66,12 +60,11 @@ void Tic9::handleMessage(cMessage *msg)
         // Ready to send another one.
         message = generateNewMessage();
         sendCopyOf(message);
-        scheduleAt(simTime()+timeout, timeoutEvent);
+        scheduleAt(simTime() + timeout, timeoutEvent);
     }
 }
 
-cMessage *Tic9::generateNewMessage()
-{
+cMessage *Tic9::generateNewMessage() {
     // Generate a message with a different name every time.
     char msgname[20];
     sprintf(msgname, "tic-%d", ++seq);
@@ -79,8 +72,7 @@ cMessage *Tic9::generateNewMessage()
     return msg;
 }
 
-void Tic9::sendCopyOf(cMessage *msg)
-{
+void Tic9::sendCopyOf(cMessage *msg) {
     // Duplicate message and send the copy.
     cMessage *copy = (cMessage *) msg->dup();
     send(copy, "out");
@@ -88,16 +80,12 @@ void Tic9::sendCopyOf(cMessage *msg)
 
 Define_Module(Toc9);
 
-void Toc9::handleMessage(cMessage *msg)
-{
-    if (uniform(0,1) < 0.1)
-    {
+void Toc9::handleMessage(cMessage *msg) {
+    if (uniform(0, 1) < 0.1) {
         EV << "\"Losing\" message.\n";
         bubble("message lost");  // making animation more informative...
         delete msg;
-    }
-    else
-    {
+    } else {
         EV << "Sending back same message as acknowledgment.\n";
         send(msg, "out");
     }

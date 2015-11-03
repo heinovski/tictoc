@@ -60,17 +60,15 @@ void Txc4::handleMessage(cMessage *msg) {
     // will bounce between the two.
     // Increment counter and check value.
     counter--;
-    if (counter==0)
-    {
-       // If counter is zero, delete message. If you run the model, you'll
-       // find that the simulation will stop at this point with the message
-       // "no more events".
-       EV << getName() << "'s counter reached zero, deleting message\n";
-       delete msg;
-    }
-    else
-    {
-       EV << getName() << "'s counter is " << counter << ", sending back message\n";
-       send(msg, "out");
+    if (counter == 0) {
+        // If counter is zero, delete message. If you run the model, you'll
+        // find that the simulation will stop at this point with the message
+        // "no more events".
+        EV << getName() << "'s counter reached zero, deleting message\n";
+        delete msg;
+    } else {
+        EV << getName() << "'s counter is " << counter
+                  << ", sending back message\n";
+        send(msg, "out");
     }
 }

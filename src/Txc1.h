@@ -19,13 +19,13 @@
 #include <csimplemodule.h>
 
 class Txc1: public cSimpleModule {
-    public:
-        Txc1();
-        virtual ~Txc1();
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Txc1();
+    virtual ~Txc1();
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 
 #endif /* TXC1_H_ */

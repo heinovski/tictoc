@@ -19,21 +19,21 @@
 #include <csimplemodule.h>
 
 class Tic8: public cSimpleModule {
-    public:
-        Tic8();
-        virtual ~Tic8();
-    private:
-        simtime_t timeout;  // timeout
-        cMessage *timeoutEvent;  // holds pointer to the timeout self-message
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Tic8();
+    virtual ~Tic8();
+private:
+    simtime_t timeout;  // timeout
+    cMessage *timeoutEvent;  // holds pointer to the timeout self-message
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 
 class Toc8: public cSimpleModule {
-    protected:
-        virtual void handleMessage(cMessage *msg);
+protected:
+    virtual void handleMessage(cMessage *msg);
 };
 
 #endif /* TXC8_H_ */

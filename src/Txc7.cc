@@ -40,12 +40,11 @@ void Txc7::initialize() {
     // Create the event object we'll use for timing -- just any ordinary message.
     event = new cMessage("event");
 
-    if (strcmp("tic", getName()) == 0)
-   {
-       EV << "Scheduling first send to t=5.0s\n";
-       scheduleAt(5.0, event);
-       tictocMsg = new cMessage("tictocMsg");
-   }
+    if (strcmp("tic", getName()) == 0) {
+        EV << "Scheduling first send to t=5.0s\n";
+        scheduleAt(5.0, event);
+        tictocMsg = new cMessage("tictocMsg");
+    }
 }
 
 void Txc7::handleMessage(cMessage *msg) {
@@ -59,29 +58,23 @@ void Txc7::handleMessage(cMessage *msg) {
     // (provided you subclass from cMessage). In this code we just check if we
     // recognize the pointer, which (if feasible) is the easiest and fastest
     // method.
-    if (msg==event)
-    {
+    if (msg == event) {
         // The self-message arrived, so we can send out tictocMsg and NULL out
         // its pointer so that it doesn't confuse us later.
         EV << "Wait period is over, sending back message\n";
         send(tictocMsg, "out");
         tictocMsg = NULL;
-    }
-    else
-    {
+    } else {
         // If the message we received is not our self-message, then it must
         // be the tic-toc message arriving from our partner. We remember its
         // pointer in the tictocMsg variable, then schedule our self-message
         // to come back to us in 1s simulated time.
 
         // "Lose" the message with 0.1 probability:
-        if (uniform(0,1) < 0.1)
-        {
+        if (uniform(0, 1) < 0.1) {
             EV << "\"Losing\" message\n";
             delete msg;
-        }
-        else
-        {
+        } else {
             // The "delayTime" module parameter can be set to values like
             // "exponential(5)" (tictoc7.ned, omnetpp.ini), and then here
             // we'll get a different delay every time.
@@ -89,7 +82,7 @@ void Txc7::handleMessage(cMessage *msg) {
 
             EV << "Message arrived, starting to wait " << delay << " secs...\n";
             tictocMsg = msg;
-            scheduleAt(simTime()+delay, event);
+            scheduleAt(simTime() + delay, event);
         }
     }
 }

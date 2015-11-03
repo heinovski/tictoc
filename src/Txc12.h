@@ -19,18 +19,13 @@
 #include <csimplemodule.h>
 
 class Txc12: public cSimpleModule {
-    public:
-        Txc12();
-        virtual ~Txc12();
-    private:
-        simtime_t timeout;  // timeout
-        cMessage *timeoutEvent;  // holds pointer to the timeout self-message
-        int seq;  // message sequence number
-        cMessage *message;  // message that has to be re-sent on timeout
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void forwardMessage(cMessage *msg);
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Txc12();
+    virtual ~Txc12();
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void forwardMessage(cMessage *msg);
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 #endif /* TXC12_H_ */

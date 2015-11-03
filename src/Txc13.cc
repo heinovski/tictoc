@@ -27,47 +27,42 @@ Txc13::~Txc13() {
 
 }
 
-void Txc13::initialize()
-{
-    if (getIndex()==0)
-    {
+void Txc13::initialize() {
+    if (getIndex() == 0) {
         // Boot the process scheduling the initial message as a self-message.
-	TicTocMsg13 *msg = generateMessage();
+        TicTocMsg13 *msg = generateMessage();
         scheduleAt(0.0, msg);
     }
 }
 
-void Txc13::handleMessage(cMessage *msg)
-{
-	TicTocMsg13 *ttmsg = check_and_cast<TicTocMsg13 *>(msg);
-	if (ttmsg->getDestination() == getIndex()) {
-		// Message arrived.
-	        EV << "Message " << ttmsg << " arrived after " << ttmsg->getHopCount() << "hops.\n";
-		bubble("ARRIVED, starting new one!");
-	        delete ttmsg;
+void Txc13::handleMessage(cMessage *msg) {
+    TicTocMsg13 *ttmsg = check_and_cast<TicTocMsg13 *>(msg);
+    if (ttmsg->getDestination() == getIndex()) {
+        // Message arrived.
+        EV << "Message " << ttmsg << " arrived after " << ttmsg->getHopCount()
+                  << "hops.\n";
+        bubble("ARRIVED, starting new one!");
+        delete ttmsg;
 
-		// Generate another one
-		EV << "Generating another message: ";
-		TicTocMsg13 *newmsg = generateMessage();
-		EV << newmsg << endl;
-		forwardMessage(newmsg);
-    }
-    else
-    {
+        // Generate another one
+        EV << "Generating another message: ";
+        TicTocMsg13 *newmsg = generateMessage();
+        EV << newmsg << endl;
+        forwardMessage(newmsg);
+    } else {
         // We need to forward the message.
         forwardMessage(ttmsg);
     }
 }
 
-void Txc13::forwardMessage(TicTocMsg13 *msg)
-{
-	// Increment hop count
-	msg->setHopCount(msg->getHopCount()+1);
+void Txc13::forwardMessage(TicTocMsg13 *msg) {
+    // Increment hop count
+    msg->setHopCount(msg->getHopCount() + 1);
 
     // In this example, we just pick a random gate to send it on.
     // We draw a random number between 0 and the size of gate `out[]'.
     int n = gateSize("gate");
-    int k = intuniform(0,n-1);
+    int k = intuniform(0, n - 1);
 //    if (!(msg->isSelfMessage())) {
 //        EV << "Message " << msg << " is a not a self message.";
 //        cGate *gate = msg->getArrivalGate()->getIndex();
@@ -82,20 +77,20 @@ void Txc13::forwardMessage(TicTocMsg13 *msg)
     send(msg, "gate$o", k);
 }
 
-TicTocMsg13* Txc13::generateMessage()
-{
-	// Produce source and destination addresses.
-	int src = getIndex(); // our module index
-	int n = size(); // module vector size
-	int dest = intuniform(0, n-2);
-	if (dest >= src) dest++;
+TicTocMsg13* Txc13::generateMessage() {
+    // Produce source and destination addresses.
+    int src = getIndex(); // our module index
+    int n = size(); // module vector size
+    int dest = intuniform(0, n - 2);
+    if (dest >= src)
+        dest++;
 
-	char msgname[20];
-	sprintf(msgname, "tic-%d-to-%d", src, dest);
+    char msgname[20];
+    sprintf(msgname, "tic-%d-to-%d", src, dest);
 
-	// Create message object and set source and destiantion field.
-	TicTocMsg13 *msg = new TicTocMsg13(msgname);
-	msg->setSource(src);
-	msg->setDestination(dest);
-	return msg;
+    // Create message object and set source and destiantion field.
+    TicTocMsg13 *msg = new TicTocMsg13(msgname);
+    msg->setSource(src);
+    msg->setDestination(dest);
+    return msg;
 }

@@ -19,25 +19,25 @@
 #include <csimplemodule.h>
 
 class Tic9: public cSimpleModule {
-    public:
-        Tic9();
-        virtual ~Tic9();
-    private:
-        simtime_t timeout;  // timeout
-        cMessage *timeoutEvent;  // holds pointer to the timeout self-message
-        int seq;  // message sequence number
-        cMessage *message;  // message that has to be re-sent on timeout
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual cMessage *generateNewMessage();
-        virtual void sendCopyOf(cMessage *msg);
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Tic9();
+    virtual ~Tic9();
+private:
+    simtime_t timeout;  // timeout
+    cMessage *timeoutEvent;  // holds pointer to the timeout self-message
+    int seq;  // message sequence number
+    cMessage *message;  // message that has to be re-sent on timeout
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual cMessage *generateNewMessage();
+    virtual void sendCopyOf(cMessage *msg);
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 
 class Toc9: public cSimpleModule {
-    protected:
-        virtual void handleMessage(cMessage *msg);
+protected:
+    virtual void handleMessage(cMessage *msg);
 };
 
 #endif /* TXC9_H_ */

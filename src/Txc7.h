@@ -19,16 +19,16 @@
 #include <csimplemodule.h>
 
 class Txc7: public cSimpleModule {
-    public:
-        Txc7();
-        virtual ~Txc7();
-    private:
-        cMessage *event; // pointer to the event object which we'll use for timing
-        cMessage *tictocMsg; // variable to remember the message until we send it back
-    protected:
-        // The following redefined virtual function holds the algorithm.
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
+public:
+    Txc7();
+    virtual ~Txc7();
+private:
+    cMessage *event; // pointer to the event object which we'll use for timing
+    cMessage *tictocMsg; // variable to remember the message until we send it back
+protected:
+    // The following redefined virtual function holds the algorithm.
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
 };
 
 #endif /* TXC1_H_ */
